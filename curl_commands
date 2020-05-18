@@ -53,3 +53,14 @@ POST _snapshot/my_repo/kafka-2020.05.12/_restore
   "rename_replacement": "$1_restored"
 }
 
+
+#Setup Hot warm arichtecture depending on the old/recent data
+#Hot/warm architecture has become a popular data storage solution for companies with high data retention goals, 
+#but they don't have the budget to buy massive amounts of high-speed storage. 
+#With hot/warm architecture, we can store our most recent (and typically most relevant) data on faster, 
+#more expensive storage and then re-allocate that data to cheaper nodes when it becomes less important. 
+#Create NODE ATTRIBUTES as HOT and WARM in your elasticsearch.yml as part of the initial setup.
+
+#Command to get the node attributes
+
+GET /_cat/nodeattrs?v
