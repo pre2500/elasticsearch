@@ -55,6 +55,7 @@ PUT index_name
 }
 }
 
+Create a EMOJI analyzer for understanding emoji search.
 
 
 
