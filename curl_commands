@@ -1,0 +1,51 @@
+#Get the state of the cluster
+GET /_cluster/health?pretty=true
+
+#Get the list of nodes,heap,ram and load on cpu
+GET /_cat/nodes?v&pretty
+
+#Get the shard assignment for all the indices
+GET /_cat/shards?v&pretty
+GET /_cat/shards?v
+
+#Get the shard assignment for a particular index in my case it is kafka index from the kafka cluster
+GET /_cat/shards/kafka-2020.05.12?v&pretty
+
+#Get info about a particular index
+GET /_cat/kafka-2020.05.12
+
+#Use cluster allocation explain API to find any issues, if it returns 400 then there is no allocation
+GET _cluster/allocation/explain
+
+GET /_nodes/stats?pretty
+
+#Backup and restore of an index is done via the snapshot API,
+#create local EFS filesystem for both the data nodes and then take the snapshot of the index
+#whenever needed restore them as well. Set the path.repo value in the elasticsearch.yml file and restart elastic server. 
+#If you dont set the directory it will not be whitelisted.Give a name to your repo
+
+PUT _snapshot/my_repo
+{
+  "type":"fs",
+  "settings":{
+    "location": "/home/centos/snapshots"
+  }
+}
+
+#By default snapshot api calls are asynchronous, so if you want to be a synchronous call then add the wait completion
+PUT _snapshot/my_repo/kafka-2020.05.12?wait_for_completion=true
+{
+  "indices": "kafka-2020.05.12"
+}
+
+#delete the index
+DELETE kafka-2020.05.12
+
+#rename them as they are restored
+POST _snapshot/my_repo/kafka-2020.05.12/_restore
+{
+  "indices": "kafka-*",
+  "rename_pattern": "index_(.+)",
+  "rename_replacement": "$1_restored"
+}
+
