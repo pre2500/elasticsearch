@@ -81,15 +81,26 @@ PUT sample_1
 }
 
 #Allocate the Shards of an Index to Specific Nodes Based on a Given Set of Requirements
-
+#These commands will only be executed if the cluster state will be in GREEN otherwise it wont be executed
 PUT kafka-2020.05.12/_settings
 {
   "index.routing.allocation.exclude._name":"data-2"
 }
 
 #To revert the above settings use the below command
-
 PUT kafka-2020.05.12/_settings
 {
   "index.routing.allocation.exclude._name": null
 }
+
+#Routing allocation can be done at the cluster level also.
+#Cluster settings also can be changed , they fall under transient (cannot withstand restarts) and persistent
+
+PUT _cluster/settings
+{
+"transient":{
+  "cluster.routing.allocation.exclude._name": "data-2"
+  }
+}
+
+
