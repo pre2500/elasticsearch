@@ -1,0 +1,19 @@
+Define and Use Index Aliases
+Use the _aliases API to add or remove aliases with:
+POST _aliases
+{
+"actions": [
+{
+"add": {. # add an alias
+"index": "", # index name or pattern
+"alias": "", # the alias to add
+"filter": { ... } # filtered alias
+}
+},
+{
+"remove": { # removes an alias
+"index": "", # index name or pattern
+"alias": "" # alias to remove
+}
+},}
+}
