@@ -1,0 +1,27 @@
+Three main components of an index are aliases , mappings and settings
+
+PUT sample_1
+{
+  "aliases": {
+    "NAME": {}
+  },
+  "mappings": {
+    
+  },
+  "settings": {
+    
+  }
+}
+
+Difference between keywords and text.Both are string fields.
+text is an analyzed fields , it is broken down into multiple tokens using an analyzer and then the same process happens
+when it is being searched as well. Whereas keyword is non anlayzed fields , it is stored in its raw format including whitespaces.
+When the search happens it matches exactly the same way it is stored.
+
+Use keyword when you want to search by the literal keyword that is you want an exact match for the whole string. 
+For eg the hostname.
+
+Whereas use Text  when you want to seach and retrieve results by the releavance score.
+
+
+
