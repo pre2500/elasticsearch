@@ -1,3 +1,7 @@
+#Notes for Elastic search cluster monitoring
+#This elastic cluster is of the version 7.6
+#It is running on Mesos DCOS D2IQ
+
 #Get the state of the cluster
 GET /_cluster/health?pretty=true
 
