@@ -1,0 +1,12 @@
+Whenever you are indexing time-series data or just having to index similar data across many different indexes, 
+it can become very tedious to continuously create indexes with the same structure over and over again. 
+By using index templates, we can automatically structure all indexes whose name matches a regular expression 
+with a specific set of requirements. 
+
+PUT _template/template_name
+{
+"index_patterns": [ ... ], # patterns to match index names on
+"aliases": { ... }, # filtered and/or non-filtered aliases
+"mappings": { ... }, # explicit and/or dynamic mappings
+"settings": { ... } # index and analysis settings
+}
