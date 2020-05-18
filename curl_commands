@@ -79,3 +79,17 @@ PUT sample_1
     "number_of_shards" : 2
  }
 }
+
+#Allocate the Shards of an Index to Specific Nodes Based on a Given Set of Requirements
+
+PUT kafka-2020.05.12/_settings
+{
+  "index.routing.allocation.exclude._name":"data-2"
+}
+
+#To revert the above settings use the below command
+
+PUT kafka-2020.05.12/_settings
+{
+  "index.routing.allocation.exclude._name": null
+}
