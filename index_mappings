@@ -23,5 +23,38 @@ For eg the hostname.
 
 Whereas use Text  when you want to seach and retrieve results by the releavance score.
 
+Date values are always stored in UTC. Kibana converts the UTC value to your local browser value and displays it.
+
+There are different types of analyzers.
+standard analyzer converts the text into alpha numeric tokens
+Elastic search comes in with different analyzers.
+The English analyzer removes words that doesnt make any meaning like the word 'THE'.
+It converts the words to their base words , like neighbor's will be analyzed as neighbor without the apporstophe.
+
+Simple analyzer splits all the punctuation into a separate word.
+
+Whitespace analyzer keeps every word that is separated
+
+Analyzers are comprised of one tokenizer, zero to many token filters, and zero or many character filters
+
+Custom analyzer syntax
+
+PUT index_name
+{
+"settings": {
+"analysis": {
+"analyzer": {
+"custom_analyzer_1": { # name your analyzer
+"type": "custom", # custom analyzers are always type custom
+"tokenizer": "", # tokenizer
+"char_filter": [ ... ], # character filters
+"filter": [ ... ] # token filters
+}
+}
+}
+}
+}
+
+
 
 
