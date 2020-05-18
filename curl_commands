@@ -64,3 +64,18 @@ POST _snapshot/my_repo/kafka-2020.05.12/_restore
 #Command to get the node attributes
 
 GET /_cat/nodeattrs?v
+
+PUT kafka-2020.05.12/_settings
+{
+  "index.routing.allocation.require.temp":"warm"
+}
+
+#Create an index by giving the number of replicas and shards
+PUT sample_1
+{
+ "settings": 
+ {
+    "number_of_replicas" : 0,
+    "number_of_shards" : 2
+ }
+}
