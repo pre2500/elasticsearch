@@ -102,5 +102,20 @@ PUT _cluster/settings
   "cluster.routing.allocation.exclude._name": "data-2"
   }
 }
+#For mature production clusters that require maximum uptime and fault tolerance, 
+#you should segment your cluster into zones (racks, host machines, data centers, etc.). 
+#You can also make shard allocation more intelligent by using node attributes to inform Elasticsearch that 
+#you have multiple zones. Instead of being allocated to the same zone, primary and replica shards are spread 
+#out to improve fault tolerance in the event that an entire zone fails.
+#primary shards are kept in one zone and replica shards are placed in another zone
+#if one zone fails we should ensure it doesnt throttle the other zone, so mention a shard should only be 
+#in only a limited set of zones so that when a zone is down it is not allowed to replicate in any other zone.
+#Configure shard allocation awareness
+#Configure forced shard allocation awareness
+#Determine which awareness method to use and why
+
+#cluster.routing.allocation.awareness.attributes:"zone"
+#cluster.routing.allocation.awareness.force.zone.values:"1,2"
+
 
 
